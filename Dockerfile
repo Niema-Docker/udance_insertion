@@ -9,5 +9,7 @@ RUN apt-get update && \
     pip3 install --no-cache-dir dendropy pandas scipy && \
     wget -qO- "https://github.com/shenwei356/seqkit/releases/download/v2.0.0/seqkit_linux_amd64.tar.gz" | tar -zx && \
     mv seqkit /usr/local/bin/ && \
+    wget -qO- "https://github.com/Niema-Docker/newick-utils/raw/main/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz" | tar -zx && \
+    mv newick-utils-*/src/nw_* /usr/local/bin/ && \
     wget -qO- "https://github.com/Niema-Docker/udance_insertion/raw/main/uDance_insertion_pipeline_2021-08-31.tar.gz" | tar -zx && \
-    # TODO
+    rm -rf newick-utils-*
