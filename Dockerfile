@@ -6,7 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y python3 python3-pip wget && \
-    pip3 install --no-cache-dir dendropy pandas scipy && \
+    pip3 install --no-cache-dir apples dendropy pandas scipy && \
     wget -qO- "https://github.com/shenwei356/seqkit/releases/download/v2.0.0/seqkit_linux_amd64.tar.gz" | tar -zx && \
     mv seqkit /usr/local/bin/ && \
     wget -qO- "https://github.com/Niema-Docker/newick-utils/raw/main/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz" | tar -zx && \
