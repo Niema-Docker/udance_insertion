@@ -6,6 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y python3 python3-pip unzip wget && \
+    ln -s $(which python3) /usr/local/bin/python && \
     pip3 install --no-cache-dir apples dendropy pandas scipy && \
     wget -qO- "https://github.com/shenwei356/seqkit/releases/download/v2.0.0/seqkit_linux_amd64.tar.gz" | tar -zx && \
     mv seqkit /usr/local/bin/ && \
@@ -15,4 +16,11 @@ RUN apt-get update && \
     unzip -d raxml-ng raxml-ng_v1.0.3_linux_x86_64.zip && \
     mv raxml-ng/raxml-ng /usr/local/bin/ && \
     wget -qO- "https://github.com/Niema-Docker/udance_insertion/raw/main/uDance_insertion_pipeline_2021-08-31.tar.gz" | tar -zx && \
+    sed -i 's/^module load/#module load/g' uDance_insertion_pipeline/run.sh && \
+    sed -i 's/^eval /#eval /g' uDance_insertion_pipeline/run.sh && \
+    sed -i 's/^conda activate/#conda activate/g' uDance_insertion_pipeline/run.sh && \
+    mv uDance_insertion_pipeline /usr/local/bin/ && \
+    ln -s /usr/local/bin/uDance_insertion_pipeline/run.sh /usr/local/bin/run_uDance_insertion.sh && \
+    mkdir -p /usr/local/bin/scripts && \
+    for f in /usr/local/bin/uDance_insertion_pipeline/scripts/* ; do ln -s "$f" "/usr/local/bin/scripts/$(echo $f | rev | cut -d'/' -f1 | rev)" ; done && \
     rm -rf newick-utils-* raxml-ng*
