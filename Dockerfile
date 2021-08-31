@@ -5,7 +5,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y python3 python3-pip wget && \
+    apt-get install -y python3 python3-pip unzip wget && \
     pip3 install --no-cache-dir dendropy pandas scipy && \
     wget -qO- "https://github.com/shenwei356/seqkit/releases/download/v2.0.0/seqkit_linux_amd64.tar.gz" | tar -zx && \
     mv seqkit /usr/local/bin/ && \
