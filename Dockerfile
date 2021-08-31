@@ -11,5 +11,7 @@ RUN apt-get update && \
     mv seqkit /usr/local/bin/ && \
     wget -qO- "https://github.com/Niema-Docker/newick-utils/raw/main/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz" | tar -zx && \
     mv newick-utils-*/src/nw_* /usr/local/bin/ && \
+    wget "https://github.com/amkozlov/raxml-ng/releases/download/1.0.3/raxml-ng_v1.0.3_linux_x86_64.zip" && \
+    unzip -d raxml-ng raxml-ng_v1.0.3_linux_x86_64.zip && \
     wget -qO- "https://github.com/Niema-Docker/udance_insertion/raw/main/uDance_insertion_pipeline_2021-08-31.tar.gz" | tar -zx && \
     rm -rf newick-utils-*
