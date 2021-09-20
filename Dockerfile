@@ -14,7 +14,7 @@ RUN apt-get update && \
     mv newick-utils-*/src/nw_* /usr/local/bin/ && \
     wget -qO- "https://github.com/stamatak/standard-RAxML/archive/refs/tags/v8.2.12.tar.gz" | tar -zx && \
     cd standard-RAxML-* && \
-    for mf in Makefile*.PTHREADS.gcc ; do make -f "$mf" ; done && \
+    make -f Makefile.PTHREADS.gcc && \
     mv raxml* /usr/local/bin/ && \
     cd .. && \
     wget -qO- "https://github.com/Niema-Docker/udance_insertion/raw/main/uDance_insertion_pipeline_2021-08-31.tar.gz" | tar -zx && \
