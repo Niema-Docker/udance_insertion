@@ -12,9 +12,11 @@ RUN apt-get update && \
     mv seqkit /usr/local/bin/ && \
     wget -qO- "https://github.com/Niema-Docker/newick-utils/raw/main/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz" | tar -zx && \
     mv newick-utils-*/src/nw_* /usr/local/bin/ && \
-    wget "https://github.com/amkozlov/raxml-ng/releases/download/1.0.3/raxml-ng_v1.0.3_linux_x86_64.zip" && \
-    unzip -d raxml-ng raxml-ng_v1.0.3_linux_x86_64.zip && \
-    mv raxml-ng/raxml-ng /usr/local/bin/ && \
+    wget -qO- "https://github.com/stamatak/standard-RAxML/archive/refs/tags/v8.2.12.tar.gz" | tar -zx && \
+    cd standard-RAxML-* && \
+    for mf in Makefile*.PTHREADS.gcc ; do make -f "$mf" ; done && \
+    mv raxml* /usr/local/bin/ && \
+    cd .. && \
     wget -qO- "https://github.com/Niema-Docker/udance_insertion/raw/main/uDance_insertion_pipeline_2021-08-31.tar.gz" | tar -zx && \
     sed -i 's/^module load/#module load/g' uDance_insertion_pipeline/run.sh && \
     sed -i 's/^eval /#eval /g' uDance_insertion_pipeline/run.sh && \
@@ -23,4 +25,4 @@ RUN apt-get update && \
     ln -s /usr/local/bin/uDance_insertion_pipeline/run.sh /usr/local/bin/run_uDance_insertion.sh && \
     mkdir -p /usr/local/bin/scripts && \
     for f in /usr/local/bin/uDance_insertion_pipeline/scripts/* ; do ln -s "$f" "/usr/local/bin/scripts/$(echo $f | rev | cut -d'/' -f1 | rev)" ; done && \
-    rm -rf newick-utils-* raxml-ng*
+    rm -rf newick-utils-* standard-RAxML-*
